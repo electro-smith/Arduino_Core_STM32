@@ -10,18 +10,18 @@ const PinName digitalPin[] = {
   PB_12, // D0
   PC_11, // D1
   PC_10, // D2
-  PC_9, // D3
-  PC_8, // D4
-  PD_2, // D5
+  PC_9,  // D3
+  PC_8,  // D4
+  PD_2,  // D5
   PC_12, // D6
   PG_10, // D7
   PG_11, // D8
-  PB_4, // D9
-  PB_5, // D10
-  PB_8, // D11
-  PB_9, // D12
-  PB_6, // D13
-  PB_7, // D14
+  PB_4,  // D9
+  PB_5,  // D10
+  PB_8,  // D11
+  PB_9,  // D12
+  PB_6,  // D13
+  PB_7,  // D14
   // NC, AUDIO IN L
   // NC, AUDIO IN R
   // NC, AUDIO OUT L
@@ -29,42 +29,41 @@ const PinName digitalPin[] = {
   // NC, AGND
   /* Left Side: */
   // NC, 3v3A Out
-  PC_0, // D15/A0
-  PA_3, // D16/A1
-  PB_1, // D17/A2
-  PA_7, // D18/A3
-  PA_6, // D19/A4
-  PC_1, // D20/A5
-  PC_4, // D21/A6
-  PA_5, // D22/A7
-  PA_4, // D23/A8
-  PA_1, // D24/A9
-  PA_0, // D25/A10
+  PC_0,  // D15/A0
+  PA_3,  // D16/A1
+  PB_1,  // D17/A2
+  PA_7,  // D18/A3
+  PA_6,  // D19/A4
+  PC_1,  // D20/A5
+  PC_4,  // D21/A6
+  PA_5,  // D22/A7
+  PA_4,  // D23/A8
+  PA_1,  // D24/A9
+  PA_0,  // D25/A10
   PD_11, // D26
-  PG_9, // D27
-  PA_2, // D28/A11
+  PG_9,  // D27
+  PA_2,  // D28/A11
   PB_14, // D29
   PB_15, // D30
   // NC, 3v3D Out
   // NC, VIN
   // NC, DGND
-  PC_7, // LED_BUILTIN
+  PC_7   // LED_BUILTIN
 };
 
 const uint32_t analogInputPin[] = {
-  // PXn, // Ax = Dx
-  15, // A0 = D15
-  16, // A1 = D16
-  17, // A2 = D17
-  18, // A3 = D18
-  19, // A4 = D19
-  20, // A5 = D20
-  21, // A6 = D21
-  22, // A7 = D22
-  23, // A8 = D23
-  24, // A9 = D24
-  25, // A10 = D25
-  28, // A11 = D28
+  15, // A0
+  16, // A1
+  17, // A2
+  18, // A3
+  19, // A4
+  20, // A5
+  21, // A6
+  22, // A7
+  23, // A8
+  24, // A9
+  25, // A10
+  28  // A11
 };
 
 #ifdef __cplusplus
@@ -84,24 +83,19 @@ extern "C" {
   */
 WEAK void SystemClock_Config(void)
 {
-  RCC_OscInitTypeDef       RCC_OscInitStruct = { 0 };
-  RCC_ClkInitTypeDef       RCC_ClkInitStruct = { 0 };
-  RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = { 0 };
+  RCC_OscInitTypeDef       RCC_OscInitStruct = {};
+  RCC_ClkInitTypeDef       RCC_ClkInitStruct = {};
+  RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {};
 
-  /** Supply configuration update enable
-  */
+  /* Supply configuration update enable */
   HAL_PWREx_ConfigSupply(PWR_LDO_SUPPLY);
-  /** Configure the main internal regulator output voltage
-  */
-  //__HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1); // 400MHz Mode.
+  /* Configure the main internal regulator output voltage */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE0); // 480MHz
 
   while (!__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY)) {}
-  /** Macro to configure the PLL clock source
-  */
+  /* Macro to configure the PLL clock source */
   __HAL_RCC_PLL_PLLSOURCE_CONFIG(RCC_PLLSOURCE_HSE);
-  /** Initializes the CPU, AHB and APB busses clocks
-  */
+  /* Initializes the CPU, AHB and APB busses clocks */
   RCC_OscInitStruct.OscillatorType
     = RCC_OSCILLATORTYPE_HSI48 | RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
@@ -120,8 +114,7 @@ WEAK void SystemClock_Config(void)
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
     Error_Handler();
   }
-  /** Initializes the CPU, AHB and APB busses clocks
-  */
+  /* Initializes the CPU, AHB and APB busses clocks */
   RCC_ClkInitStruct.ClockType
     = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1
       | RCC_CLOCKTYPE_PCLK2 | RCC_CLOCKTYPE_D3PCLK1 | RCC_CLOCKTYPE_D1PCLK1;
@@ -176,8 +169,7 @@ WEAK void SystemClock_Config(void)
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK) {
     Error_Handler();
   }
-  /** Enable USB Voltage detector
-  */
+  /* Enable USB Voltage detector */
   HAL_PWREx_EnableUSBVoltageDetector();
 }
 

@@ -8,73 +8,62 @@ extern "C" {
 /*----------------------------------------------------------------------------
  *        Pins
  *----------------------------------------------------------------------------*/
-
 #define PB12 0
 #define PC11 1
 #define PC10 2
-#define PC9 3
-#define PC8 4
-#define PD2 5
+#define PC9  3
+#define PC8  4
+#define PD2  5
 #define PC12 6
 #define PG10 7
 #define PG11 8
-#define PB4 9
-#define PB5 10
-#define PB8 11
-#define PB9 12
-#define PB6 13
-#define PB7 14
-#define  PC0 15
-#define  PA3 16
-#define  PB1 17
-#define  PA7 18
-#define  PA6 19
-#define  PC1 20
-#define  PC4 21
-#define  PA5 22
-#define  PA4 23
-#define  PA1 24
-#define  PA0 25
-#define  PD11 26
-#define  PG9 27
-#define  PA2 28
-#define  PB14 29
-#define  PB15 30
-#define  PC7 31 // LED_BUILTIN
+#define PB4  9
+#define PB5  10
+#define PB8  11
+#define PB9  12
+#define PB6  13
+#define PB7  14
+#define PC0  A0
+#define PA3  A1
+#define PB1  A2
+#define PA7  A3
+#define PA6  A4
+#define PC1  A5
+#define PC4  A6
+#define PA5  A7
+#define PA4  A8
+#define PA1  A9
+#define PA0  A10
+#define PD11 26
+#define PG9  27
+#define PA2  A11
+#define PB14 29
+#define PB15 30
+#define PC7  31 // LED_BUILTIN
 
-// This must be a literal with the same value as PEND
+// This must be a literal
 #define NUM_DIGITAL_PINS        32
-// This must be a literal with a value less than or equal to to MAX_ANALOG_INPUTS
+// This must be a literal
 #define NUM_ANALOG_INPUTS       12
-//#define NUM_ANALOG_FIRST        15 // commented out to use analogInputPin[]
 
 // On-board LED pin number
 #define LED_BUILTIN             PC7
 #define LED_RED                 LED_BUILTIN
 
-// Below SPI and I2C definitions already done in the core
-// Could be redefined here if differs from the default one
 // SPI Definitions
-#define PIN_SPI_SS              7  // Default for Arduino connector compatibility
-#define PIN_SPI_MOSI            10 // Default for Arduino connector compatibility
-#define PIN_SPI_MISO            9  // Default for Arduino connector compatibility
-#define PIN_SPI_SCK             8  // Default for Arduino connector compatibility
+#define PIN_SPI_SS              PG10
+#define PIN_SPI_MOSI            PB5
+#define PIN_SPI_MISO            PB4
+#define PIN_SPI_SCK             PG11
 
 // I2C Definitions
-#define PIN_WIRE_SDA            12 // Default for Arduino connector compatibility
-#define PIN_WIRE_SCL            11  // Default for Arduino connector compatibility
+#define PIN_WIRE_SDA            PB9
+#define PIN_WIRE_SCL            PB8
 
 // I2C timing definitions (optional), avoid time spent to compute if defined
-// * I2C_TIMING_SM for Standard Mode (100kHz)
-// * I2C_TIMING_FM for Fast Mode (400kHz)
-// * I2C_TIMING_FMP for Fast Mode Plus (1000kHz)
 #define I2C_TIMING_SM           0x30E0628A
 #define I2C_TIMING_FM           0x20D01132
 #define I2C_TIMING_FMP          0x1080091A
-
-
-// On-board user button
-#define USER_BTN                x   // No User Button Available...
 
 // Timer Definitions
 // Use TIM6/TIM7 when possible as servo and tone don't need GPIO output pin
@@ -82,24 +71,18 @@ extern "C" {
 #define TIMER_SERVO             TIM7
 
 // UART Definitions
-#define SERIAL_UART_INSTANCE    1 // Pins PB6, PB7
+#define SERIAL_UART_INSTANCE    1
 
-// Serial pin used for console (ex: ST-Link)
+// Serial pin used for console
 // Required by Firmata
 #define PIN_SERIAL_RX           PB7
 #define PIN_SERIAL_TX           PB6
 
-// HSE default value is 25MHz in HAL
-// HSE_BYPASS is 8MHz ?
 // HSE is 16MHz on Daisy Seed.
-#ifndef HSE_BYPASS_NOT_USED
 #define HSE_VALUE 16000000
-#endif
 
 /* Extra HAL modules */
 #define HAL_DAC_MODULE_ENABLED
-//#define HAL_MDMA_MODULE_ENABLED // Needed for QSPI
-//#define HAL_QSPI_MODULE_ENABLED
 
 #ifdef __cplusplus
 } // extern "C"
